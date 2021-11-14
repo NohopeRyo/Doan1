@@ -48,7 +48,7 @@ namespace Đồ_án_I
             set
             {
                 if (value >= 1990&&value<=2021)
-                    masv = value;
+                    namsinh = value;
             }
         }
         public string Sodienthoai
@@ -141,12 +141,12 @@ namespace Đồ_án_I
             fwrite.Close();
         }
         //Xóa một thông tin sinh viên khi biết mã
-        public void Delete(string masv)
+        public void Delete(int masv)
         {
             List<SinhVien> list = GetAllData2();
             StreamWriter fwrite = File.CreateText(file);
             foreach (SinhVien SV in list)
-                if (SV.MaSv >= 1)
+                if (SV.MaSv != masv)
                     fwrite.WriteLine(SV.MaSv + "#" + SV.Hoten + "#" + SV.QueQuan + "#" + SV.Namsinh + "#" + SV.Sodienthoai + "#" + SV.Email);
             fwrite.Close();
         }
@@ -209,12 +209,12 @@ namespace Đồ_án_I
             List<SinhVien> list = GetAllData2();
             List<SinhVien> kq = new List<SinhVien>();
             //Giá trị ngầm định ban đầu
-            if (SV.Hoten == null && SV.MaSv == 2)
+            if (SV.Hoten == null && SV.MaSv == 0)
             {
                 kq = list;
             }
             //Tìm theo tên sinh viên
-            if (SV.Hoten != null && SV.MaSv<1 )
+            if (SV.Hoten != null && SV.MaSv == 0 )
             {
                 foreach (SinhVien c in list)
                     if (c.Hoten.IndexOf(c.Hoten) >= 0)
@@ -223,7 +223,7 @@ namespace Đồ_án_I
                     }
             }
             //Tìm kiếm theo mã
-            else if (SV.Hoten != null && SV.MaSv < 1)
+            else if (SV.Hoten != null && SV.MaSv != 0)
             {
                 foreach (SinhVien c in list)
                     if (c.MaSv == SV.MaSv)
@@ -244,11 +244,11 @@ namespace Đồ_án_I
             Console.WriteLine("------------------------------------------------------");
             y = y + 4;
             Console.SetCursorPosition(x + 1, y); Console.Write("Mã sinh viên");
-            Console.SetCursorPosition(x + 12, y); Console.Write("Tên sinh viên");
+            Console.SetCursorPosition(x + 15, y); Console.Write("Tên sinh viên");
             Console.SetCursorPosition(x + 30, y); Console.Write("Quê Quán");
-            Console.SetCursorPosition(x + 35, y); Console.Write("Năm sinh ");
-            Console.SetCursorPosition(x + 50, y); Console.Write("Số điện thoại");
-            Console.SetCursorPosition(x + 60, y); Console.Write("Email");
+            Console.SetCursorPosition(x + 40, y); Console.Write("Năm sinh ");
+            Console.SetCursorPosition(x + 55, y); Console.Write("Số điện thoại");
+            Console.SetCursorPosition(x + 70, y); Console.Write("Email");
 
 
 
@@ -257,11 +257,11 @@ namespace Đồ_án_I
             {
                 y = y + 1;
                 Console.SetCursorPosition(1, y); Console.Write(list[i].MaSv.ToString());
-                Console.SetCursorPosition(12, y); Console.Write(list[i].Hoten);
+                Console.SetCursorPosition(15, y); Console.Write(list[i].Hoten);
                 Console.SetCursorPosition(30, y); Console.Write(list[i].QueQuan);
-                Console.SetCursorPosition(35, y); Console.Write(list[i].Namsinh);
-                Console.SetCursorPosition(50, y); Console.Write(list[i].Sodienthoai);
-                Console.SetCursorPosition(60, y); Console.Write(list[i].Email);
+                Console.SetCursorPosition(40, y); Console.Write(list[i].Namsinh.ToString());
+                Console.SetCursorPosition(55, y); Console.Write(list[i].Sodienthoai);
+                Console.SetCursorPosition(70, y); Console.Write(list[i].Email);
 
                 Console.WriteLine();
                 if ((++d) == n) break;
@@ -276,30 +276,30 @@ namespace Đồ_án_I
             {
                 //Hiên thị mẫu nhập
                 Console.Clear();
-                Console.WriteLine("                                                                             NHẬP THÔNG TIN SINH VIÊN");
-                Console.WriteLine("======================================================================================================================================================================");
-                Console.WriteLine("| Mã sinh viên :                                                                   |\n");
+                Console.WriteLine("                              NHẬP THÔNG TIN SINH VIÊN");
+                Console.WriteLine("=================================================================================");
+                Console.WriteLine("| Mã sinh viên :                                                                |\n");
                 Console.WriteLine("| Họ và tên :                                                                   |\n");
                 Console.WriteLine("| Ngày tháng năm sinh :                                                         |\n");
                 Console.WriteLine("| Quê quán :                                                                    |\n");
                 Console.WriteLine("| Số điện thoại :                                                               |\n");
                 Console.WriteLine("| Email :                                                                       |\n");
-                Console.WriteLine("======================================================================================================================================================================");
+                Console.WriteLine("=================================================================================");
                 Console.WriteLine();
 
                 //Hiển thị danh sách đã nhập
                 int x = 0;
-                int y = 9;
-                int v = ShowSV(GetAllData2(), x, y, "                 DANH SACH DA NHAP                      ", "Nhan Esc de thoat, Enter de luu!", 9);
+                int y = 15;
+                int v = ShowSV(GetAllData2(), x, y, "                 DANH SACH DA NHAP                      ", "Nhan Esc de thoat, Enter de luu!", 15);
                 //Yêu cầu nhập thông tin theo mẫu nhập
                 SinhVien SV = new SinhVien();
                 Console.SetCursorPosition(19, 2); SV.MaSv = int.Parse(Console.ReadLine());
-                Console.SetCursorPosition(14, 3); SV.Hoten = Console.ReadLine();
-                Console.SetCursorPosition(24, 4); SV.Namsinh = int.Parse(Console.ReadLine());
-                Console.SetCursorPosition(13, 6); SV.QueQuan = Console.ReadLine();
-                Console.SetCursorPosition(18, 8); SV.Sodienthoai = Console.ReadLine();
-                Console.SetCursorPosition(9, 10); SV.Email = Console.ReadLine();
-                Console.SetCursorPosition(130, v);//Đưa con trỏ tới vị trí cuối cùng của danh sách được hiện thị ở trên dựa vào v
+                Console.SetCursorPosition(14, 4); SV.Hoten = Console.ReadLine();
+                Console.SetCursorPosition(24, 6); SV.Namsinh = int.Parse(Console.ReadLine());
+                Console.SetCursorPosition(13, 8); SV.QueQuan = Console.ReadLine();
+                Console.SetCursorPosition(18, 10); SV.Sodienthoai = Console.ReadLine();
+                Console.SetCursorPosition(9, 12); SV.Email = Console.ReadLine();
+                Console.SetCursorPosition(35, v);//Đưa con trỏ tới vị trí cuối cùng của danh sách được hiện thị ở trên dựa vào v
                 //Đợi xem người dùng lựa chọn chức năng gì(thoát hay nhập)
                 ConsoleKeyInfo kt = Console.ReadKey();
                 if (kt.Key == ConsoleKey.Escape)
@@ -315,12 +315,12 @@ namespace Đồ_án_I
             {
                 Console.Clear();
                 ShowSV(GetAllData2(), 0, 0, "                 DANH SÁCH THÔNG TIN SINH VIÊN                 ", "Nhập mã sinh viên để xóa, thoát nhấn enter!", 20);
-                string d = Console.ReadLine();
-                if (d == "") return;
+                int d = int.Parse(Console.ReadLine());
+                if (d == 0) return;
                 else Delete(d);
             } while (true);
         }
-        //Tìm sách
+        //Tìm sinh viên
         public void SearchSV()
         {
             string hoten = "";
@@ -328,14 +328,13 @@ namespace Đồ_án_I
             {
                 Console.Clear();
                 List<SinhVien> list = Search(new SinhVien(0, hoten, null, 0, null,null));
-                ShowSV(list, 0, 0, "                 DANH SÁCH THÔNG TIN SINH VIÊN                       ", "Nhập mã sinh viên cần tìm, Nhấn Enter de thoat!", 30);
+                ShowSV(list, 0, 0, "                 DANH SÁCH THÔNG TIN SINH VIÊN                       ", "Nhập mã sinh viên cần tìm, Nhấn Enter de thoat!", 35);
                 hoten = Console.ReadLine();
                 if (hoten == "") return;
             } while (true);
         }
         public void ShowSV()
         {
-
             Console.Clear();
             List<SinhVien> list = GetAllData2();
             ShowSV(list, 0, 0, "                 DANH SÁCH THÔNG TIN SINH VIÊN                       ", "Nhấn Enter để thoát!", list.Count);
@@ -373,25 +372,26 @@ namespace Đồ_án_I
             Console.WriteLine("Email:");
             int v = Console.CursorTop;
             //Yêu cầu nhập thông tin sinh viên theo mẫu nhập                
-            Console.SetCursorPosition(16, 4); int masv = int.Parse( Console.ReadLine());
+            Console.SetCursorPosition(16, 3); int masv = int.Parse( Console.ReadLine());
 
             SinhVien SV = theomaSV(masv);
             if (SV != null)
             {
-                //Hiển thị thông tin sinh viên đã tồn tạI
+                //Hiển thị thông tin sinh viên đã tồn tại
 
-                Console.SetCursorPosition(51, 5); Console.Write(SV.Hoten);
-                Console.SetCursorPosition(12, 6); Console.Write(SV.QueQuan);
-                Console.SetCursorPosition(46, 7); Console.Write(SV.Namsinh);
-                Console.SetCursorPosition(35, 8); Console.Write(SV.Sodienthoai);
-                Console.SetCursorPosition(35, 9);Console.Write(SV.Email);
+                Console.SetCursorPosition(8, 4); Console.Write(SV.Hoten);
+                Console.SetCursorPosition(12, 5); Console.Write(SV.QueQuan);
+                Console.SetCursorPosition(15, 6); Console.Write(SV.Namsinh);
+                Console.SetCursorPosition(15, 7); Console.Write(SV.Sodienthoai);
+                Console.SetCursorPosition(15, 8);Console.Write(SV.Email);
                 Console.SetCursorPosition(0, v);
                 //Nhập lại thông tin mới
 
-                Console.SetCursorPosition(70, 5); try { hoten = Console.ReadLine(); } catch { }
-                Console.SetCursorPosition(16, 6); try { quequan = Console.ReadLine(); } catch { }
-                Console.SetCursorPosition(70, 7); try { namsinh =int.Parse( Console.ReadLine()); } catch { }
-                Console.SetCursorPosition(46, 8); try { sodienthoai = Console.ReadLine(); } catch { }
+                Console.SetCursorPosition(50, 4); try { hoten = Console.ReadLine(); } catch { }
+                Console.SetCursorPosition(50, 5); try { quequan = Console.ReadLine(); } catch { }
+                Console.SetCursorPosition(50, 6); try { namsinh =int.Parse( Console.ReadLine()); } catch { }
+                Console.SetCursorPosition(50, 7); try { sodienthoai = Console.ReadLine(); } catch { }
+                Console.SetCursorPosition(50, 8); try { email = Console.ReadLine(); } catch { }
                 Console.SetCursorPosition(0, v);//Đưa con trỏ tới vị trí cuối cùng của danh sách được hiện thị ở trên dựa vào v
                 Console.Write("Nhan Esc de thoat, Enter de luu!");
                 //Nếu có dữ liệu có thay đổi thị cập nhật lại
