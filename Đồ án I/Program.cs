@@ -44,7 +44,7 @@ namespace Đồ_án_I
                         {
                             switch (QLmenu.menu1())
                             {
-                                case 1: Console.Clear(); sv.ImportSV(); break;
+                                case 1: sv.ImportSV(); break;
                                 case 2: sv.SearchSV(); break;
                                 case 3: sv.DeleteSV(); break;
                                 case 4: sv.EditSV(); break;
@@ -52,7 +52,7 @@ namespace Đồ_án_I
                                 case 6: Đồ_án_I.Program.menu(); Console.ReadKey(); break;
                             }
                         } while (QLmenu.menu1() != 6);
-                        Console.ReadKey();
+                        
                         break;
                     case 2:
                         do
@@ -65,11 +65,11 @@ namespace Đồ_án_I
                                 case 3: qlsc.DeleteScore(); Console.ReadKey(); break;
                                 case 4: qlsc.EditScore(); Console.ReadKey(); break;
                                 case 5: qlsc.ShowScore(); Console.ReadKey(); break;
-                                case 6: Đồ_án_I.Program.menu(); break;
+                                case 6: Đồ_án_I.Program.menu(); Console.ReadKey(); break;
                             }
                         } while (QLmenu.menu2() != 6);
-                        Console.ReadKey(); break;
-                    case 3:
+                         break;
+                    case 3:                       
                         Environment.Exit(0); break;
                 }
             } while (true);

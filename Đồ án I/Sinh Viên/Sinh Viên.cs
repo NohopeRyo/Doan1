@@ -244,11 +244,11 @@ namespace Đồ_án_I
             Console.WriteLine("------------------------------------------------------");
             y = y + 4;
             Console.SetCursorPosition(x + 1, y); Console.Write("Mã sinh viên");
-            Console.SetCursorPosition(x + 15, y); Console.Write("Tên sinh viên");
-            Console.SetCursorPosition(x + 30, y); Console.Write("Quê Quán");
-            Console.SetCursorPosition(x + 40, y); Console.Write("Năm sinh ");
-            Console.SetCursorPosition(x + 55, y); Console.Write("Số điện thoại");
-            Console.SetCursorPosition(x + 70, y); Console.Write("Email");
+            Console.SetCursorPosition(x + 20, y); Console.Write("Tên sinh viên");
+            Console.SetCursorPosition(x + 40, y); Console.Write("Quê Quán");
+            Console.SetCursorPosition(x + 60, y); Console.Write("Năm sinh ");
+            Console.SetCursorPosition(x + 70, y); Console.Write("Số điện thoại");
+            Console.SetCursorPosition(x + 90, y); Console.Write("Email");
 
 
 
@@ -257,11 +257,11 @@ namespace Đồ_án_I
             {
                 y = y + 1;
                 Console.SetCursorPosition(1, y); Console.Write(list[i].MaSv.ToString());
-                Console.SetCursorPosition(15, y); Console.Write(list[i].Hoten);
-                Console.SetCursorPosition(30, y); Console.Write(list[i].QueQuan);
-                Console.SetCursorPosition(40, y); Console.Write(list[i].Namsinh.ToString());
-                Console.SetCursorPosition(55, y); Console.Write(list[i].Sodienthoai);
-                Console.SetCursorPosition(70, y); Console.Write(list[i].Email);
+                Console.SetCursorPosition(20, y); Console.Write(list[i].Hoten);
+                Console.SetCursorPosition(40, y); Console.Write(list[i].QueQuan);
+                Console.SetCursorPosition(60, y); Console.Write(list[i].Namsinh.ToString());
+                Console.SetCursorPosition(70, y); Console.Write(list[i].Sodienthoai);
+                Console.SetCursorPosition(90, y); Console.Write(list[i].Email);
 
                 Console.WriteLine();
                 if ((++d) == n) break;
