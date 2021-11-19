@@ -20,7 +20,7 @@ namespace Đồ_án_I
             Console.WriteLine("‖3.   Xóa thông tin sinh viên                       ‖");
             Console.WriteLine("‖4.   Sửa thông tin sinh viên                       ‖");
             Console.WriteLine("‖5.   Hien thi cac sinh viên                        ‖");
-            Console.WriteLine("‖6.   Quay lại                                     ‖");
+            Console.WriteLine("‖6.   Quay lại                                      ‖");
             Console.Write("\n Chọn mục: ");
             int t;
             do
@@ -40,12 +40,12 @@ namespace Đồ_án_I
                 Console.WriteLine("=============MAIN MENU=============");
                 Console.WriteLine("========HỆ THỐNG QUẢN LÝ SINH VIÊN KHOA CNTT========");
                 Console.WriteLine("===============QUẢN LÝ ĐIỂM SINH VIÊN====================");
-                Console.WriteLine("‖1.   Nhập điểm sinh viên                      ‖");
-                Console.WriteLine("‖2.   Tìm điểm sinh viên theo mã                                ‖");
-                Console.WriteLine("‖3.   Xóa điểm sinh viên                       ‖");
-                Console.WriteLine("‖4.   Sửa điểm sinh viên                       ‖");
-                Console.WriteLine("‖5.   Hiển thị điểm sinh viên                        ‖");
-                Console.WriteLine("‖6.   Quay lại                                     ‖");
+                Console.WriteLine("‖1.   Nhập điểm sinh viên                               ‖");
+                Console.WriteLine("‖2.   Tìm điểm sinh viên theo mã                        ‖");
+                Console.WriteLine("‖3.   Xóa điểm sinh viên                                ‖");
+                Console.WriteLine("‖4.   Sửa điểm sinh viên                                ‖");
+                Console.WriteLine("‖5.   Hiển thị điểm sinh viên                           ‖");
+                Console.WriteLine("‖6.   Quay lại                                          ‖");
             }
             Console.Write("\n Bạn hãy chọn mục (1->6): ");
             int t;

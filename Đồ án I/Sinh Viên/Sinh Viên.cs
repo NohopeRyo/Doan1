@@ -242,7 +242,7 @@ namespace Đồ_án_I
             Console.WriteLine();
             Console.WriteLine(tieudedau);
             Console.WriteLine("------------------------------------------------------");
-            y = y + 4;
+            y = y + 5;
             Console.SetCursorPosition(x + 1, y); Console.Write("Mã sinh viên");
             Console.SetCursorPosition(x + 20, y); Console.Write("Tên sinh viên");
             Console.SetCursorPosition(x + 40, y); Console.Write("Quê Quán");

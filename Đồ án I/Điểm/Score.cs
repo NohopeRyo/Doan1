@@ -57,7 +57,7 @@ namespace Đồ_án_I
         }
         public double Ltpcb
         {
-            get { return Ltpcb; }
+            get { return ltpcb; }
             set
             {
                 if (value >= 0 && value <= 10)
@@ -186,12 +186,12 @@ namespace Đồ_án_I
     }
     class QLScore
     {
-        private string file = "Score.txt";
+        private string txtfile = "Score.txt";
         //Lấy toàn bộ dữ liệu có trong file Score.txt đưa vào một danh sách 
         public List<Score> GetAllData2()
         {
             List<Score> list = new List<Score>();
-            StreamReader fread = File.OpenText(file);
+            StreamReader fread = File.OpenText(txtfile);
             string s = fread.ReadLine();
             while (s != null)
             {
@@ -210,33 +210,33 @@ namespace Đồ_án_I
         public void Insert(Score sc)
         {
 
-            StreamWriter fwrite = File.AppendText(file);
+            StreamWriter fwrite = File.AppendText(txtfile);
             fwrite.WriteLine();
             fwrite.Write(sc.MaSv + "#" + sc.Dstt+"#"+sc.Gdtc + "#"+sc.Ktmt + "#"+sc.Dhnn + "#" + sc.Ltpcb + "#" + sc.Gdqpvan + "#" + sc.Knm + "#" + sc.Pldc + "#" + sc.Gt + "#" + sc.Gdtc2 + "#" + sc.Mmm + "#" + sc.Ctdlvgt + "#" + sc.Hdh + "#" + sc.Csktlt );
             fwrite.Close();
         }
         //Xóa một thông tin điểm sinh viên khi biết mã sinh viên
-        public void Delete(string masv)
+        public void Delete(int masv)
         {
             List<Score> list = GetAllData2();
-            StreamWriter fwrite = File.CreateText(file);
+            StreamWriter fwrite = File.CreateText(txtfile);
             foreach (Score sc in list)
-                if (sc.MaSv >= 1)
+                if (sc.MaSv != masv)
                     fwrite.WriteLine(sc.MaSv + "#" + sc.Dstt + "#" + sc.Gdtc + "#" + sc.Ktmt + "#" + sc.Dhnn + "#" + sc.Ltpcb + "#" + sc.Gdqpvan + "#" + sc.Knm + "#" + sc.Pldc + "#" + sc.Gt + "#" + sc.Gdtc2 + "#" + sc.Mmm + "#" + sc.Ctdlvgt + "#" + sc.Hdh + "#" + sc.Csktlt);
             fwrite.Close();
         }
         //Sửa một thông tin điểm sinh viên
-        public void Update(Score edit)
+        public void Update(Score x)
         {
             List<Score> list = GetAllData2();
             for (int i = 0; i < list.Count; ++i)
-                if (list[i].MaSv == edit.MaSv)
+                if (list[i].MaSv == x.MaSv)
                 {
-                    list[i] = edit;
+                    list[i] = x;
                     break;
                 }
 
-            StreamWriter fwrite = File.CreateText(file);
+            StreamWriter fwrite = File.AppendText(txtfile);
             foreach (Score sc in list)
                 fwrite.WriteLine(sc.MaSv + "#" + sc.Dstt + "#" + sc.Gdtc + "#" + sc.Ktmt + "#" + sc.Dhnn + "#" + sc.Ltpcb + "#" + sc.Gdqpvan + "#" + sc.Knm + "#" + sc.Pldc + "#" + sc.Gt + "#" + sc.Gdtc2 + "#" + sc.Mmm + "#" + sc.Ctdlvgt + "#" + sc.Hdh + "#" + sc.Csktlt);
             fwrite.Close();
@@ -263,7 +263,7 @@ namespace Đồ_án_I
         public void DeleteScore(int masv)
         {
             List<Score> list = GetAllData2();
-            StreamWriter fwrite = File.CreateText(file);
+            StreamWriter fwrite = File.CreateText(txtfile);
             foreach (Score sc in list)
                 if (sc.MaSv != masv)
                     fwrite.WriteLine(sc.MaSv + "#" + sc.Dstt + "#" + sc.Gdtc + "#" + sc.Ktmt + "#" + sc.Dhnn + "#" + sc.Ltpcb + "#" + sc.Gdqpvan + "#" + sc.Knm + "#" + sc.Pldc + "#" + sc.Gt + "#" + sc.Gdtc2 + "#" + sc.Mmm + "#" + sc.Ctdlvgt + "#" + sc.Hdh + "#" + sc.Csktlt);
@@ -283,7 +283,7 @@ namespace Đồ_án_I
             List<Score> list = GetAllData2();
             List<Score> kq = new List<Score>();
             //Giá trị ngầm định ban đầu
-            if (sc.MaSv == 2)
+            if (sc.MaSv == 0)
             {
                 kq = list;
             }
@@ -298,7 +298,7 @@ namespace Đồ_án_I
             }
             else
                 kq = null;
-            Console.WriteLine("Không tìm thấy mã sinh viên nào hợp lý để tìm thấy điểm");
+            //Console.WriteLine("Không tìm thấy mã sinh viên nào hợp lý để tìm thấy điểm");
             return kq;
         }
         public int ShowScore(List<Score> list, int x, int y, string tieudedau, string tieudecuoi, int n)
@@ -307,22 +307,22 @@ namespace Đồ_án_I
             Console.WriteLine();
             Console.WriteLine(tieudedau);
             Console.WriteLine("------------------------------------------------------");
-            y = y + 4;
-            Console.SetCursorPosition(x + 1, y); Console.Write("Mã sinh viên");
-            Console.SetCursorPosition(x + 12, y); Console.Write("Đại số tuyến tính");
-            Console.SetCursorPosition(x + 30, y); Console.Write("Giáo dục thể chất");
-            Console.SetCursorPosition(x + 35, y); Console.Write("Kỹ thuật máy tính ");
-            Console.SetCursorPosition(x + 50, y); Console.Write("Định hướng nghề nghiệp");
-            Console.SetCursorPosition(x + 60, y); Console.Write("Lập trình Python cơ bản");
-            Console.SetCursorPosition(x + 70, y);Console.Write("Giáo dục quốc phòng và an ninh");
-            Console.SetCursorPosition(x + 80, y);Console.Write("Kỹ năng mềm");
-            Console.SetCursorPosition(x + 90, y);Console.Write("Pháp luật đại cương");
-            Console.SetCursorPosition(x + 100, y);Console.Write("Giải tích");
-            Console.SetCursorPosition(x + 110, y);Console.Write("Giáo dục thể chất 2:");
-            Console.SetCursorPosition(x + 120, y);Console.Write("Mạng máy tính:");
-            Console.SetCursorPosition(x + 130, y);Console.Write("Cấu trúc dữ liệu và giải thuật:");
-            Console.SetCursorPosition(x + 140, y);Console.Write("Hệ điều hành");
-            Console.SetCursorPosition(x + 150, y);Console.Write("Cơ sở kỹ thuật lập trình:");
+            y = y + 5;
+            Console.SetCursorPosition(x + 1, y); Console.Write("Mã SV");
+            Console.SetCursorPosition(x + 10, y); Console.Write("ĐSTT");
+            Console.SetCursorPosition(x + 15, y); Console.Write("GDTC");
+            Console.SetCursorPosition(x + 20, y); Console.Write("KTMT ");
+            Console.SetCursorPosition(x + 25, y); Console.Write("ĐHNN");
+            Console.SetCursorPosition(x + 30, y); Console.Write("LTPythonCB");
+            Console.SetCursorPosition(x + 41, y);Console.Write("GDQP&AN");
+            Console.SetCursorPosition(x + 49, y);Console.Write("KNM");
+            Console.SetCursorPosition(x + 53, y);Console.Write("PLĐC");
+            Console.SetCursorPosition(x + 58, y);Console.Write("Giải tích");
+            Console.SetCursorPosition(x + 68, y);Console.Write("GDTC2");
+            Console.SetCursorPosition(x + 74, y);Console.Write("Mạng máy tính");
+            Console.SetCursorPosition(x + 88, y);Console.Write("CTDL&GT");
+            Console.SetCursorPosition(x + 96, y);Console.Write("Hệ điều hành");
+            Console.SetCursorPosition(x + 110, y);Console.Write("CSKTLT");
 
 
 
@@ -331,20 +331,20 @@ namespace Đồ_án_I
             {
                 y = y + 1;
                 Console.SetCursorPosition(1, y); Console.Write(list[i].MaSv.ToString());
-                Console.SetCursorPosition(12, y); Console.Write(list[i].Dstt);
-                Console.SetCursorPosition(30, y); Console.Write(list[i].Gdtc);
-                Console.SetCursorPosition(35, y); Console.Write(list[i].Ktmt);
-                Console.SetCursorPosition(50, y); Console.Write(list[i].Dhnn);
-                Console.SetCursorPosition(60, y); Console.Write(list[i].Ltpcb);
-                Console.SetCursorPosition(70, y);Console.Write(list[i].Gdqpvan);
-                Console.SetCursorPosition(80, y);Console.Write(list[i].Knm);
-                Console.SetCursorPosition(90, y);Console.Write(list[i].Pldc);
-                Console.SetCursorPosition(100, y);Console.Write(list[i].Gt);
-                Console.SetCursorPosition(110, y);Console.Write(list[i].Gdtc2);
-                Console.SetCursorPosition(120, y);Console.Write(list[i].Mmm);
-                Console.SetCursorPosition(130, y);Console.Write(list[i].Ctdlvgt);
-                Console.SetCursorPosition(140, y);Console.Write(list[i].Hdh);
-                Console.SetCursorPosition(150, y);Console.Write(list[i].Csktlt);
+                Console.SetCursorPosition(10, y); Console.Write(list[i].Dstt);
+                Console.SetCursorPosition(15, y); Console.Write(list[i].Gdtc);
+                Console.SetCursorPosition(20, y); Console.Write(list[i].Ktmt);
+                Console.SetCursorPosition(25, y); Console.Write(list[i].Dhnn);
+                Console.SetCursorPosition(30, y); Console.Write(list[i].Ltpcb);
+                Console.SetCursorPosition(41, y);Console.Write(list[i].Gdqpvan);
+                Console.SetCursorPosition(49, y);Console.Write(list[i].Knm);
+                Console.SetCursorPosition(53, y);Console.Write(list[i].Pldc);
+                Console.SetCursorPosition(58, y);Console.Write(list[i].Gt);
+                Console.SetCursorPosition(68, y);Console.Write(list[i].Gdtc2);
+                Console.SetCursorPosition(74, y);Console.Write(list[i].Mmm);
+                Console.SetCursorPosition(88, y);Console.Write(list[i].Ctdlvgt);
+                Console.SetCursorPosition(96, y);Console.Write(list[i].Hdh);
+                Console.SetCursorPosition(110, y);Console.Write(list[i].Csktlt);
                 Console.WriteLine();
                 if ((++d) == n) break;
             }
@@ -358,48 +358,48 @@ namespace Đồ_án_I
             {
                 //Hiên thị mẫu nhập
                 Console.Clear();
-                Console.WriteLine("                                                                             NHẬP THÔNG TIN ĐIỂM SINH VIÊN");
-                Console.WriteLine("======================================================================================================================================================================");
+                Console.WriteLine("                           NHẬP THÔNG TIN ĐIỂM SINH VIÊN");
+                Console.WriteLine("====================================================================================");
                 Console.WriteLine("| Mã sinh viên :                                                                   |\n");
-                Console.WriteLine("| Điểm môn Đại số tuyến tính :   |\n");
-                Console.WriteLine("| Điểm môn Giáo dục thể chất :   |\n");
-                Console.WriteLine("| Điểm môn Kỹ thuật máy tính :   |\n");
-                Console.WriteLine("| Điểm môn Định hướng nghề nghiệp :   |\n");
-                Console.WriteLine("| Điểm môn Lập trình Python cơ bản :   |\n");
-                Console.WriteLine("| Điểm môn Giáo dục quốc phòng và an ninh :   |\n");
-                Console.WriteLine("| Điểm môn Kỹ năng mềm :   |\n");
-                Console.WriteLine("| Điểm môn Pháp luật đại cương :   |\n");
-                Console.WriteLine("| Điểm môn Giải tích :   |\n");
-                Console.WriteLine("| Điểm môn Giáo dục thể chất 2:|\n");
-                Console.WriteLine("| Điểm môn Mạng máy tính:|\n");
-                Console.WriteLine("| Điểm môn Cấu trúc dữ liệu và giải thuật:|\n");
-                Console.WriteLine("| Điểm môn Hệ điều hành:|\n");
-                Console.WriteLine("| Điểm môn Cơ sở kỹ thuật lập trình:|\n");
-                Console.WriteLine("======================================================================================================================================================================");
+                Console.WriteLine("| Điểm môn Đại số tuyến tính :                                                     |\n");
+                Console.WriteLine("| Điểm môn Giáo dục thể chất :                                                     |\n");
+                Console.WriteLine("| Điểm môn Kỹ thuật máy tính :                                                     |\n");
+                Console.WriteLine("| Điểm môn Định hướng nghề nghiệp :                                                |\n");
+                Console.WriteLine("| Điểm môn Lập trình Python cơ bản :                                               |\n");
+                Console.WriteLine("| Điểm môn Giáo dục quốc phòng và an ninh :                                        |\n");
+                Console.WriteLine("| Điểm môn Kỹ năng mềm :                                                           |\n");
+                Console.WriteLine("| Điểm môn Pháp luật đại cương :                                                   |\n");
+                Console.WriteLine("| Điểm môn Giải tích :                                                             |\n");
+                Console.WriteLine("| Điểm môn Giáo dục thể chất 2:                                                    |\n");
+                Console.WriteLine("| Điểm môn Mạng máy tính:                                                          |\n");
+                Console.WriteLine("| Điểm môn Cấu trúc dữ liệu và giải thuật:                                         |\n");
+                Console.WriteLine("| Điểm môn Hệ điều hành:                                                           |\n");
+                Console.WriteLine("| Điểm môn Cơ sở kỹ thuật lập trình:                                               |\n");
+                Console.WriteLine("====================================================================================");
                 Console.WriteLine();
 
                 //Hiển thị danh sách đã nhập
                 int x = 0;
-                int y = 9;
-                int v = ShowScore(GetAllData2(), x, y, "                 DANH SACH DA NHAP                      ", "Nhan Esc de thoat, Enter de luu!", 9);
+                int y = 32;
+                int v = ShowScore(GetAllData2(), x, y, "                 DANH SACH DA NHAP                      ", "Nhan Esc de thoat, Enter de luu!", 15);
                 //Yêu cầu nhập thông tin theo mẫu nhập
                 Score sc = new Score();
-                Console.SetCursorPosition(19, 3); sc.MaSv = int.Parse(Console.ReadLine());
+                Console.SetCursorPosition(19, 2); sc.MaSv = int.Parse(Console.ReadLine());
                 Console.SetCursorPosition(30, 4); sc.Dstt = double.Parse(Console.ReadLine());
-                Console.SetCursorPosition(30, 5); sc.Gdtc = double.Parse(Console.ReadLine());
-                Console.SetCursorPosition(30, 6); sc.Ktmt = double.Parse(Console.ReadLine());
-                Console.SetCursorPosition(35, 7); sc.Dhnn = double.Parse(Console.ReadLine());
-                Console.SetCursorPosition(36, 8); sc.Ltpcb = double.Parse(Console.ReadLine());
-                Console.SetCursorPosition(43, 9); sc.Gdqpvan = double.Parse(Console.ReadLine());
-                Console.SetCursorPosition(24, 10); sc.Knm = double.Parse(Console.ReadLine());
-                Console.SetCursorPosition(32, 11); sc.Pldc = double.Parse(Console.ReadLine());
-                Console.SetCursorPosition(22, 12); sc.Gt = double.Parse(Console.ReadLine());
-                Console.SetCursorPosition(43, 13);sc.Gdtc2 = double.Parse(Console.ReadLine());
-                Console.SetCursorPosition(40, 14);sc.Mmm = double.Parse(Console.ReadLine());
-                Console.SetCursorPosition(60, 15);sc.Ctdlvgt = double.Parse(Console.ReadLine());
-                Console.SetCursorPosition(40, 16);sc.Hdh = double.Parse(Console.ReadLine());
-                Console.SetCursorPosition(60, 17);sc.Csktlt = double.Parse(Console.ReadLine());
-                Console.SetCursorPosition(130, v);//Đưa con trỏ tới vị trí cuối cùng của danh sách được hiện thị ở trên dựa vào v
+                Console.SetCursorPosition(30, 6); sc.Gdtc = double.Parse(Console.ReadLine());
+                Console.SetCursorPosition(30, 8); sc.Ktmt = double.Parse(Console.ReadLine());
+                Console.SetCursorPosition(35, 10); sc.Dhnn = double.Parse(Console.ReadLine());
+                Console.SetCursorPosition(36, 12); sc.Ltpcb = double.Parse(Console.ReadLine());
+                Console.SetCursorPosition(43, 14); sc.Gdqpvan = double.Parse(Console.ReadLine());
+                Console.SetCursorPosition(24, 16); sc.Knm = double.Parse(Console.ReadLine());
+                Console.SetCursorPosition(32, 18); sc.Pldc = double.Parse(Console.ReadLine());
+                Console.SetCursorPosition(22, 20); sc.Gt = double.Parse(Console.ReadLine());
+                Console.SetCursorPosition(43, 22);sc.Gdtc2 = double.Parse(Console.ReadLine());
+                Console.SetCursorPosition(40, 24);sc.Mmm = double.Parse(Console.ReadLine());
+                Console.SetCursorPosition(60, 26);sc.Ctdlvgt = double.Parse(Console.ReadLine());
+                Console.SetCursorPosition(40, 28);sc.Hdh = double.Parse(Console.ReadLine());
+                Console.SetCursorPosition(60, 30);sc.Csktlt = double.Parse(Console.ReadLine());
+                Console.SetCursorPosition(60, v);//Đưa con trỏ tới vị trí cuối cùng của danh sách được hiện thị ở trên dựa vào v
                 //Đợi xem người dùng lựa chọn chức năng gì(thoát hay nhập)
                 ConsoleKeyInfo kt = Console.ReadKey();
                 if (kt.Key == ConsoleKey.Escape)
@@ -414,9 +414,10 @@ namespace Đồ_án_I
             do
             {
                 Console.Clear();
-                ShowScore(GetAllData2(), 0, 0, "                 DANH SÁCH THÔNG TIN ĐIỂM SINH VIÊN                 ", "Nhập mã sinh viên để xóa, thoát nhấn enter!", 20);
-                string d = Console.ReadLine();
-                if (d == "") return;
+                ShowScore(GetAllData2(), 0, 0, "                 DANH SÁCH THÔNG TIN ĐIỂM SINH VIÊN                 ", "Nhập mã sinh viên để xóa, thoát nhấn số 0!", 20);
+                int d = int.Parse(Console.ReadLine());
+                ConsoleKeyInfo kt = Console.ReadKey();
+                if (d==0) return;
                 else Delete(d);
             } while (true);
         }
@@ -473,24 +474,24 @@ namespace Đồ_án_I
             Console.WriteLine("            NHAP THONG TIN SINH VIEN CAN SUA           ");
             Console.WriteLine("------------------------------------------------------");
             Console.WriteLine();
-            Console.WriteLine("Ma sinh vien:                                          ");
-            Console.WriteLine("| Điểm môn Đại số tuyến tính :   |\n");
-            Console.WriteLine("| Điểm môn Giáo dục thể chất :   |\n");
-            Console.WriteLine("| Điểm môn Kỹ thuật máy tính :   |\n");
-            Console.WriteLine("| Điểm môn Định hướng nghề nghiệp :   |\n");
-            Console.WriteLine("| Điểm môn Lập trình Python cơ bản :   |\n");
-            Console.WriteLine("| Điểm môn Giáo dục quốc phòng và an ninh :   |\n");
-            Console.WriteLine("| Điểm môn Kỹ năng mềm :   |\n");
-            Console.WriteLine("| Điểm môn Pháp luật đại cương :   |\n");
-            Console.WriteLine("| Điểm môn Giải tích :   |\n");
-            Console.WriteLine("| Điểm môn Giáo dục thể chất 2:|\n");
-            Console.WriteLine("| Điểm môn Mạng máy tính:|\n");
-            Console.WriteLine("| Điểm môn Cấu trúc dữ liệu và giải thuật:|\n");
-            Console.WriteLine("| Điểm môn Hệ điều hành:|\n");
-            Console.WriteLine("| Điểm môn Cơ sở kỹ thuật lập trình:|\n");
+            Console.WriteLine("| Ma sinh vien:                                      |\n");
+            Console.WriteLine("| Điểm môn Đại số tuyến tính :                       |\n");
+            Console.WriteLine("| Điểm môn Giáo dục thể chất :                       |\n");
+            Console.WriteLine("| Điểm môn Kỹ thuật máy tính :                       |\n");
+            Console.WriteLine("| Điểm môn Định hướng nghề nghiệp :                  |\n");
+            Console.WriteLine("| Điểm môn Lập trình Python cơ bản :                 |\n");
+            Console.WriteLine("| Điểm môn Giáo dục quốc phòng và an ninh :          |\n");
+            Console.WriteLine("| Điểm môn Kỹ năng mềm :                             |\n");
+            Console.WriteLine("| Điểm môn Pháp luật đại cương :                     |\n");
+            Console.WriteLine("| Điểm môn Giải tích :                               |\n");
+            Console.WriteLine("| Điểm môn Giáo dục thể chất 2:                      |\n");
+            Console.WriteLine("| Điểm môn Mạng máy tính:                            |\n");
+            Console.WriteLine("| Điểm môn Cấu trúc dữ liệu và giải thuật:           |\n");
+            Console.WriteLine("| Điểm môn Hệ điều hành:                             |\n");
+            Console.WriteLine("| Điểm môn Cơ sở kỹ thuật lập trình:                 |\n");
             int v = Console.CursorTop;
             //Yêu cầu nhập thông tin sinh viên theo mẫu nhập                
-            Console.SetCursorPosition(16, 4); int masv = int.Parse(Console.ReadLine());
+            Console.SetCursorPosition(16, 3); int masv = int.Parse(Console.ReadLine());
 
             Score sc = theomaScore(masv);
             if (sc != null)
@@ -498,36 +499,36 @@ namespace Đồ_án_I
                 //Hiển thị thông tin sinh viên đã tồn tạI
 
                 Console.SetCursorPosition(51, 5); Console.Write(sc.Dstt);
-                Console.SetCursorPosition(12, 6); Console.Write(sc.Gdtc);
-                Console.SetCursorPosition(46, 7); Console.Write(sc.Ktmt);
-                Console.SetCursorPosition(35, 8); Console.Write(sc.Dhnn);
-                Console.SetCursorPosition(35, 9); Console.Write(sc.Ltpcb);
-                Console.SetCursorPosition(40, 10);Console.Write(sc.Gdqpvan);
-                Console.SetCursorPosition(40, 11);Console.Write(sc.Knm);
-                Console.SetCursorPosition(40, 12);Console.Write(sc.Pldc);
-                Console.SetCursorPosition(40, 13);Console.Write(sc.Gt);
-                Console.SetCursorPosition(60, 14);Console.Write(sc.Gdtc2);
-                Console.SetCursorPosition(60, 15);Console.Write(sc.Mmm);
-                Console.SetCursorPosition(60, 16);Console.Write(sc.Ctdlvgt);
-                Console.SetCursorPosition(60, 17);Console.Write(sc.Hdh);
-                Console.SetCursorPosition(60, 18);Console.Write(sc.Csktlt);
+                Console.SetCursorPosition(51, 7); Console.Write(sc.Gdtc);
+                Console.SetCursorPosition(51, 9); Console.Write(sc.Ktmt);
+                Console.SetCursorPosition(51, 11); Console.Write(sc.Dhnn);
+                Console.SetCursorPosition(51, 13); Console.Write(sc.Ltpcb);
+                Console.SetCursorPosition(51, 15);Console.Write(sc.Gdqpvan);
+                Console.SetCursorPosition(51, 17);Console.Write(sc.Knm);
+                Console.SetCursorPosition(51, 19);Console.Write(sc.Pldc);
+                Console.SetCursorPosition(51, 21);Console.Write(sc.Gt);
+                Console.SetCursorPosition(51, 23);Console.Write(sc.Gdtc2);
+                Console.SetCursorPosition(51, 25);Console.Write(sc.Mmm);
+                Console.SetCursorPosition(51, 27);Console.Write(sc.Ctdlvgt);
+                Console.SetCursorPosition(51, 29);Console.Write(sc.Hdh);
+                Console.SetCursorPosition(51, 31);Console.Write(sc.Csktlt);
                 Console.SetCursorPosition(0, v);
                 //Nhập lại thông tin mới
 
-                Console.SetCursorPosition(70, 5); try { dstt = double.Parse(Console.ReadLine()); } catch { }
-                Console.SetCursorPosition(70, 6); try { gdtc = double.Parse(Console.ReadLine()); } catch { }
-                Console.SetCursorPosition(70, 7); try { ktmt = double.Parse(Console.ReadLine()); } catch { }
-                Console.SetCursorPosition(70, 8); try { dhnn = double.Parse(Console.ReadLine()); } catch { }
-                Console.SetCursorPosition(70, 9); try { ltpcb = double.Parse(Console.ReadLine()); } catch { }
-                Console.SetCursorPosition(70, 10); try { gdqpvan = double.Parse(Console.ReadLine()); } catch { }
-                Console.SetCursorPosition(70, 11); try { knm = double.Parse(Console.ReadLine()); } catch { }
-                Console.SetCursorPosition(70, 12); try { pldc = double.Parse(Console.ReadLine()); } catch { }
-                Console.SetCursorPosition(70, 13); try { gt = double.Parse(Console.ReadLine()); } catch { }
-                Console.SetCursorPosition(70, 14); try { gdtc2 = double.Parse(Console.ReadLine()); } catch { }
-                Console.SetCursorPosition(70, 15); try { mmm = double.Parse(Console.ReadLine()); } catch { }
-                Console.SetCursorPosition(70, 16); try { ctdlvgt = double.Parse(Console.ReadLine()); } catch { }
-                Console.SetCursorPosition(70, 17); try { hdh = double.Parse(Console.ReadLine()); } catch { }
-                Console.SetCursorPosition(70, 18); try { csktlt = double.Parse(Console.ReadLine()); } catch { }
+                Console.SetCursorPosition(54, 5); try { dstt = double.Parse(Console.ReadLine()); } catch { }
+                Console.SetCursorPosition(54, 7); try { gdtc = double.Parse(Console.ReadLine()); } catch { }
+                Console.SetCursorPosition(54, 9); try { ktmt = double.Parse(Console.ReadLine()); } catch { }
+                Console.SetCursorPosition(54, 11); try { dhnn = double.Parse(Console.ReadLine()); } catch { }
+                Console.SetCursorPosition(54, 13); try { ltpcb = double.Parse(Console.ReadLine()); } catch { }
+                Console.SetCursorPosition(54, 15); try { gdqpvan = double.Parse(Console.ReadLine()); } catch { }
+                Console.SetCursorPosition(54, 17); try { knm = double.Parse(Console.ReadLine()); } catch { }
+                Console.SetCursorPosition(54, 19); try { pldc = double.Parse(Console.ReadLine()); } catch { }
+                Console.SetCursorPosition(54, 21); try { gt = double.Parse(Console.ReadLine()); } catch { }
+                Console.SetCursorPosition(54, 23); try { gdtc2 = double.Parse(Console.ReadLine()); } catch { }
+                Console.SetCursorPosition(54, 25); try { mmm = double.Parse(Console.ReadLine()); } catch { }
+                Console.SetCursorPosition(54, 27); try { ctdlvgt = double.Parse(Console.ReadLine()); } catch { }
+                Console.SetCursorPosition(54, 29); try { hdh = double.Parse(Console.ReadLine()); } catch { }
+                Console.SetCursorPosition(54, 31); try { csktlt = double.Parse(Console.ReadLine()); } catch { }
                 Console.SetCursorPosition(0, v);//Đưa con trỏ tới vị trí cuối cùng của danh sách được hiện thị ở trên dựa vào v
                 Console.Write("Nhan Esc de thoat, Enter de luu!");
                 //Nếu có dữ liệu có thay đổi thị cập nhật lại
