@@ -61,11 +61,11 @@ namespace Đồ_án_I
                             {
 
                                 case 1: qlsc.ImportScore(); break;
-                                case 2: qlsc.SearchScore(); Console.ReadKey(); break;
-                                case 3: qlsc.DeleteScore(); Console.ReadKey(); break;
-                                case 4: qlsc.EditScore(); Console.ReadKey(); break;
-                                case 5: qlsc.ShowScore(); Console.ReadKey(); break;
-                                case 6: Đồ_án_I.Program.menu(); Console.ReadKey(); break;
+                                case 2: qlsc.SearchScore();  break;
+                                case 3: qlsc.DeleteScore();  break;
+                                case 4: qlsc.EditScore();  break;
+                                case 5: qlsc.ShowScore(); break;
+                                case 6: Đồ_án_I.Program.menu();  break;
                             }
                         } while (QLmenu.menu2() != 6);
                          break;
