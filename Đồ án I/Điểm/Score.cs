@@ -382,7 +382,7 @@ namespace Đồ_án_I
             do
             {
                 Console.Clear();
-                ShowScore(GetAllData(), 0, 0, "                 DANH SÁCH THÔNG TIN ĐIỂM SINH VIÊN                 ", "Nhập mã sinh viên để xóa, thoát nhấn enter!", 20);
+                ShowScore(GetAllData(), 0, 0, "                 DANH SÁCH THÔNG TIN ĐIỂM SINH VIÊN                 ", "Nhập mã sinh viên để xóa, thoát nhấn số 0!", 20);
                 int d =int.Parse( Console.ReadLine());
                 ConsoleKeyInfo kt = Console.ReadKey();
                 if (d == 0) return;
