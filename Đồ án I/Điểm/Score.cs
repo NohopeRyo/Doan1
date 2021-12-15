@@ -293,7 +293,27 @@ namespace Đồ_án_I
                 int v = ShowScore3(GetAllData(), x, y, "                 DANH SACH DA NHAP                      ", "Nhan Esc de thoat, Enter de luu!", 15);
                 //Yêu cầu nhập thông tin theo mẫu nhập
                 Score sc = new Score();
-                Console.SetCursorPosition(19, 2); sc.MaSv = int.Parse(Console.ReadLine());
+                List<Score> b = GetAllData();
+                Console.SetCursorPosition(19, 2);
+                int i;
+                do
+                {
+                    sc.MaSv =int.Parse (Console.ReadLine());
+                    for (i = b.Count - 1; i >= 0; --i)
+                    {
+                        if (b[i].MaSv == sc.MaSv)
+                        {                          
+                            Console.SetCursorPosition(30, 2); Console.Write("Mã nhập bị trùng hãy nhập lại ấn enter");
+                            ConsoleKeyInfo ktmn = Console.ReadKey();
+                            if (ktmn.Key == ConsoleKey.Enter)
+                            {
+                                ImportScore();
+                            }
+                            break;
+                        }
+                    }
+                } while (i >= 0);
+
                 Console.SetCursorPosition(30, 3); sc.Dstt = double.Parse(Console.ReadLine());
                 Console.SetCursorPosition(30, 4); sc.Gdtc = double.Parse(Console.ReadLine());
                 Console.SetCursorPosition(30, 5); sc.Ktmt = double.Parse(Console.ReadLine());

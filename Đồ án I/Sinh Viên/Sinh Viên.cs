@@ -199,7 +199,26 @@ namespace Đồ_án_I
                 int v = ShowSV(GetAllData2(), x, y, "                 DANH SACH DA NHAP                      ", "Nhan Esc de thoat, Enter de luu!", 15);
                 //Yêu cầu nhập thông tin theo mẫu nhập
                 SinhVien SV = new SinhVien();
-                Console.SetCursorPosition(16, 2); SV.MaSv = int.Parse(Console.ReadLine());
+                List<SinhVien> a = GetAllData2();
+                Console.SetCursorPosition(19, 2);
+                int i;
+                do
+                {
+                    SV.MaSv = int.Parse(Console.ReadLine());
+                    for (i = a.Count - 1; i >= 0; --i)
+                    {
+                        if (a[i].MaSv == SV.MaSv)
+                        {
+                            Console.SetCursorPosition(30, 2); Console.Write("Mã nhập bị trùng hãy nhập lại ấn enter");
+                            ConsoleKeyInfo ktmn = Console.ReadKey();
+                            if (ktmn.Key == ConsoleKey.Enter)
+                            {
+                                ImportSV();
+                            }
+                            break;
+                        }
+                    }
+                } while (i >= 0);
                 Console.SetCursorPosition(14, 3); SV.Hoten = Console.ReadLine();
                 Console.SetCursorPosition(24, 4); SV.Namsinh = Console.ReadLine();
                 Console.SetCursorPosition(13, 5); SV.QueQuan = Console.ReadLine();
